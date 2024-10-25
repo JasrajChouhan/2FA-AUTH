@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from "next/navigation"
+import { useRouter } from "next/navigation";
 
 interface LoginButtonProps {
   children: React.ReactNode,
@@ -19,12 +19,12 @@ const LoginButton = ({
 
   function handleClick() {
     console.log("Logged button is clicked")
-    router.push('/api/auth')
+    router.push('/auth/login')
   }
   return (
-      <div onClick={handleClick} className="cursor-pointer">
-        {children}
-      </div>
+    <div onClick={handleClick} className="cursor-pointer">
+      {children}
+    </div>
   )
 }
 
