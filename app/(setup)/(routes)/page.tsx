@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 export default function Home() {
   return (
     <main
-      className="h-screen flex flex-col justify-center items-center space-y-8 text-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[rgba(2,0,36,1)] to-[rgba(68,65,66,1)] dark:from-[rgba(5,5,20,1)] dark:to-[rgba(20,20,20,1)] p-4 sm:p-8 lg:p-16"
+      className="h-screen flex flex-col justify-center items-center space-y-8 text-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#000000] to-[#201f1f]  p-4 sm:p-8 lg:p-16"
     >
       <section>
         <h1
