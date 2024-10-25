@@ -1,16 +1,15 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 import { login } from '@/actions/loginForm';
 import CardWrapper from '@/components/auth/CardWrapper';
-import { LoginSchema } from '@/schemas';
-import { useState, useTransition } from 'react';
-import FormError from '../FormError';
-import FormSuccess from '../FormSuccess';
-import { Button } from '../ui/button';
+import FormError from '@/components/FormError';
+import FormSuccess from '@/components/FormSuccess';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -18,8 +17,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../ui/form';
-import { Input } from '../ui/input';
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { LoginSchema } from '@/schemas';
 
 const LoginForm = () => {
 

@@ -1,23 +1,23 @@
 'use clinet';
 
-import { FaGoogle  , FaGithub} from 'react-icons/fa';
-import { FcGoogle} from 'react-icons/fc';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
+import { FaGithub } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
 
 const Social = () => {
   return (
     <div className='w-full flex justify-center items-center gap-x-6' >
       <Button
-        variant={"outline"} 
-        onClick={() => { }} 
+        variant={"outline"}
+        onClick={() => { }}
         size={"lg"}
         className='w-full'
       >
         <FcGoogle className='h-5 w-5' />
       </Button>
       <Button
-        variant={"outline"} 
-        onClick={() => { }} 
+        variant={"outline"}
+        onClick={() => { }}
         size={"lg"}
         className='w-full'
       >

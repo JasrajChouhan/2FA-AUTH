@@ -6,11 +6,9 @@ import * as z from 'zod';
 
 import { registerAction } from '@/actions/registerAction';
 import CardWrapper from '@/components/auth/CardWrapper';
-import { RegisterSchema } from '@/schemas';
-import { useState, useTransition } from 'react';
-import FormError from '../FormError';
-import FormSuccess from '../FormSuccess';
-import { Button } from '../ui/button';
+import FormError from '@/components/FormError';
+import FormSuccess from '@/components/FormSuccess';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -18,8 +16,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../ui/form';
-import { Input } from '../ui/input';
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { RegisterSchema } from '@/schemas';
+import { useState, useTransition } from 'react';
 
 const RegisterForm = () => {
 
