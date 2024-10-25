@@ -25,11 +25,7 @@ export const registerAction = async (
 
   // check email already exsits in db or not?
 
-  const exisitingUser = await db.user.findFirst({
-    where: {
-      email: email
-    }
-  })
+  const exisitingUser = await getUserByEmail(email)
 
   if (exisitingUser) {
     return {
