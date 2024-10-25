@@ -1,10 +1,10 @@
 'use server';
-import bcrypt from 'bcrypt';
+import bcryptjs from 'bcryptjs';
 import { z } from "zod";
 
+import { getUserByEmail } from '@/data/user';
 import { db } from "@/lib/db";
 import { RegisterSchema } from "@/schemas";
-import { getUserByEmail } from '@/data/user';
 
 export const registerAction = async (
   data: z.infer<typeof RegisterSchema>
@@ -38,7 +38,7 @@ export const registerAction = async (
   }
 
   // hash the password
-  const hashedPassword = await bcrypt.hash(password, 10)
+  const hashedPassword = await bcryptjs.hash(password, 10)
 
   // create an user and save into db 
 
