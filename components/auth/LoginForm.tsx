@@ -20,8 +20,13 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { LoginSchema } from '@/schemas';
+import searchParamError from '@/utils/serachParamsError';
+import { useSearchParams } from 'next/navigation';
 
 const LoginForm = () => {
+
+  const serachParams = useSearchParams()
+  const urlError = searchParamError(serachParams.get("error") as string)
 
   const [error, setError] = useState<string | undefined>("")
   const [success, setSuccess] = useState<string | undefined>("")
@@ -47,8 +52,8 @@ const LoginForm = () => {
     startTransition(() => {
       login(data)
         .then((data) => {
-          setError(data.error)
-          setSuccess(data.success)
+          setError(data?.error)
+          setSuccess(data?.success)
         })
     })
 
@@ -102,7 +107,7 @@ const LoginForm = () => {
               )}
             />
             {error &&
-              <FormError errorMessage={error as string} />}
+              <FormError errorMessage={error as string || urlError as string} />}
             {success &&
               <FormSuccess successMessage={success as string} />}
             <Button

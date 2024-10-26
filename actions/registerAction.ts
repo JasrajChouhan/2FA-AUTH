@@ -2,6 +2,7 @@
 import bcryptjs from 'bcryptjs';
 import { z } from "zod";
 
+import { generateVerifiactionToken } from '@/data/tokens';
 import { getUserByEmail } from '@/data/user';
 import { db } from "@/lib/db";
 import { RegisterSchema } from "@/schemas";
@@ -56,8 +57,11 @@ export const registerAction = async (
   }
 
   // TODO :: Send the varification email
+
+  const verficationToken = await generateVerifiactionToken(email)
+  console.log(verficationToken.token)
   return {
-    success: "User created!"
+    success: "Confirmation email is sent"
   }
 
 }

@@ -18,10 +18,17 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String?
+  role          UserRole        @default(USER)
   accounts      Account[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+// user role 
+enum UserRole {
+  USER
+  ADMIN
 }
 
 
@@ -45,4 +52,14 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([provider, providerAccountId])
+}
+
+model verficationToken {
+  id            String          @id @default(cuid())
+  token         String          @unique
+  exipres       DateTime
+  email         String          @unique
+
+  @@unique([token , email])
+
 }
