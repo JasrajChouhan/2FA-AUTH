@@ -4,6 +4,7 @@ export interface Environment {
   AUTH_GOOGLE_CLIENT_SECRET: string;
   AUTH_GITHUB_CLIENT_ID: string;
   AUTH_GITHUB_CLIENT_SECRET: string;
+  RESEND_API_KEY: string;
 }
 
 

@@ -5,6 +5,7 @@ import { z } from "zod";
 import { generateVerifiactionToken } from '@/data/tokens';
 import { getUserByEmail } from '@/data/user';
 import { db } from "@/lib/db";
+import { sendVerificationEmail } from '@/lib/sendMail';
 import { RegisterSchema } from "@/schemas";
 
 export const registerAction = async (
@@ -56,9 +57,15 @@ export const registerAction = async (
     }
   }
 
-  // TODO :: Send the varification email
-
+  // send verificaiton email
   const verficationToken = await generateVerifiactionToken(email)
+  await sendVerificationEmail(
+    verficationToken.email, verficationToken?.token as string
+  )
+
+
+
+  // const verficationToken = await generateVerifiactionToken(email)
   console.log(verficationToken.token)
   return {
     success: "Confirmation email is sent"
