@@ -7,9 +7,16 @@ import { db } from "@/lib/db";
 export const newEmailVerification = async (token: string) => {
 
   const verificationToken = await getVerifiactionTokenByToken(token)
-
   if (!verificationToken) {
     return { error: "Invalid or expired token" };
+  }
+
+  // Is token is expired ?
+  const isTokenExipred = verificationToken.exipres < new Date();
+  if (isTokenExipred) {
+    return {
+      error: "Expired Token"
+    }
   }
 
   const email = verificationToken.email as string;
