@@ -63,3 +63,13 @@ model verficationToken {
   @@unique([token , email])
 
 }
+
+model forgotPasswordToken {
+  id            String          @id @default(cuid())
+  token         String          @unique
+  exipres       DateTime
+  email         String          @unique
+
+  @@unique([token , email])
+
+}

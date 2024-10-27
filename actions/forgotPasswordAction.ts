@@ -1,6 +1,8 @@
 "use server";
 
+import { generateForgotPasswordToken } from "@/data/tokens";
 import { getUserByEmail } from "@/data/user";
+import { sendForgotPasswordEmail } from "@/lib/sendMail";
 import { ForgotPasswordSchema } from "@/schemas";
 import { z } from "zod";
 
@@ -24,6 +26,9 @@ export const forgotPassword = async (data: z.infer<typeof ForgotPasswordSchema>)
     }
 
     // generat the token and send the email(with token )
+
+    const forgotPasswordToken = await generateForgotPasswordToken(email)
+    await sendForgotPasswordEmail(forgotPasswordToken?.email as string, forgotPasswordToken?.token as string)
 
     return {
       success: "Email sent successfully"
