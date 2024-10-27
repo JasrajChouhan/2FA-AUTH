@@ -16,3 +16,9 @@ export const RegisterSchema = z.object({
     message: "Name must have atleat have 3 characters."
   })
 })
+
+export const ForgotPasswordSchema = z.object({
+  email: z.string().email({
+    message: "Email must required."
+  })
+})

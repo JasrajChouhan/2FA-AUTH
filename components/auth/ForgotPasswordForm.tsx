@@ -1,11 +1,10 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import { login } from '@/actions/loginForm';
+import { forgotPassword } from '@/actions/forgotPasswordAction';
 import CardWrapper from '@/components/auth/CardWrapper';
 import FormError from '@/components/FormError';
 import FormSuccess from '@/components/FormSuccess';
@@ -19,39 +18,33 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { LoginSchema } from '@/schemas';
-import searchParamError from '@/utils/serachParamsError';
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { ForgotPasswordSchema } from '@/schemas';
+import { useState, useTransition } from 'react';
 
-const LoginForm = () => {
-
-  const serachParams = useSearchParams()
-  const urlError = searchParamError(serachParams.get("error") as string)
+const ForgotPasswordForm = () => {
 
   const [error, setError] = useState<string | undefined>("")
   const [success, setSuccess] = useState<string | undefined>("")
   const [isPending, startTransition] = useTransition()
 
-  const form = useForm<z.infer<typeof LoginSchema>>({
-    resolver: zodResolver(LoginSchema),
+  const form = useForm<z.infer<typeof ForgotPasswordSchema>>({
+    resolver: zodResolver(ForgotPasswordSchema),
     defaultValues: {
-      email: '',
-      password: '',
-    },
+      email: ''
+    }
   });
 
   const { isLoading } = form.formState
 
   // Submit handler
-  const onSubmit = async (data: z.infer<typeof LoginSchema>) => {
+  const onSubmit = async (data: z.infer<typeof ForgotPasswordSchema>) => {
 
     // clear the success and error message 
     setError("")
     setSuccess("")
 
     startTransition(() => {
-      login(data)
+      forgotPassword(data)
         .then((data) => {
           setError(data?.error)
           setSuccess(data?.success)
@@ -62,10 +55,9 @@ const LoginForm = () => {
 
   return (
     <CardWrapper
-      showSocial={true}
-      backButtonHref='/auth/register'
-      backButtonLabel="Don't have an account?"
-      headerLabel='Welcome back! Please Login'
+      backButtonHref='/auth/login'
+      backButtonLabel="Back to Login"
+      headerLabel='Forgot Password!'
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
@@ -88,34 +80,8 @@ const LoginForm = () => {
                 </FormItem>
               )}
             />
-
-            <FormField
-              control={form.control}
-              name='password'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder='********'
-                      type='password'
-                      disabled={isPending}
-                      {...field}
-                    />
-                  </FormControl>
-                  <Button
-                    variant={"link"}
-                    size={"sm"}
-                    asChild
-                    className='px-0 font-normal' >
-                    <Link href={"/auth/reset"}> Forgot Password </Link>
-                  </Button>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             {error &&
-              <FormError errorMessage={error as string || urlError as string} />}
+              <FormError errorMessage={error as string} />}
             {success &&
               <FormSuccess successMessage={success as string} />}
             <Button
@@ -123,7 +89,7 @@ const LoginForm = () => {
               type='submit'
               disabled={isPending || isLoading}
             >
-              {isLoading ? 'Submitting...' : 'Submit'}
+              {isLoading ? 'Submitting...' : 'Send reset email'}
             </Button>
           </div>
         </form>
@@ -132,4 +98,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default ForgotPasswordForm;
