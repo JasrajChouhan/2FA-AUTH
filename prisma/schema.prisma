@@ -21,8 +21,10 @@ model User {
   role          UserRole        @default(USER)
   accounts      Account[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  isTwoFactorEnabled Boolean?
+  twoFactorConfirmation  TwoFactorConfirmation[]
 }
 
 // user role 
@@ -72,4 +74,22 @@ model forgotPasswordToken {
 
   @@unique([token , email])
 
+}
+
+model TwoFactorToken {
+  id            String          @id @default(cuid())
+  token         String          @unique
+  exipres       DateTime
+  email         String          @unique
+
+  @@unique([token , email])
+
+}
+
+model TwoFactorConfirmation {
+  id            String          @id @default(cuid())
+  userId        String          
+
+  user User @relation( fields: [userId]  , references: [id] , onDelete: Cascade)
+  @@unique([userId])
 }
