@@ -22,3 +22,12 @@ export const ForgotPasswordSchema = z.object({
     message: "Email must required."
   })
 })
+
+export const NewPasswordSchema = z.object({
+  newPassword: z.string().min(6, {
+    message: "Password must have atleat 6 characters."
+  }),
+  confirmPassword: z.string().min(6, {
+    message: "Confirm password must have atleat 6 characters."
+  }),
+})

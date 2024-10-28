@@ -1,10 +1,10 @@
 import { db } from "@/lib/db";
 
-export const getForgotPasswordToken = async (email: string) => {
+export const getForgotPasswordTokenByToken = async (token: string) => {
   try {
     const forgotPasswordToken = await db.forgotPasswordToken.findFirst({
       where: {
-        email: email
+        token: token
       }
     })
     return forgotPasswordToken;
