@@ -17,7 +17,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Discord-Clone",
-  description: "A discord clone app",
+  description: "2FA-Auth",
 };
 
 export default function RootLayout({
@@ -26,10 +26,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning = {true}>
+    <html lang="en" suppressHydrationWarning={true}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        suppressContentEditableWarning = {true}
+        suppressContentEditableWarning={true}
       >
         <ThemeProvider
           attribute="class"
